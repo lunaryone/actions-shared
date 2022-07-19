@@ -15,4 +15,13 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  yan:
+    needs: fuck
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 yan"
+  fuck:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 fuck"
 
