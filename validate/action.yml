@@ -1,0 +1,17 @@
+# action.yml
+name: 'Validate title format'
+description: ''
+inputs:
+  title:  # id of input
+    description: 'Title of the pull request'
+    required: true
+outputs:
+  result: # id of output
+    description: 'Success or not'
+    value: ${{ steps.main.outputs.result }}
+runs:
+  using: 'composite'
+  steps:
+    - id: main
+      run: echo "$::set-output name=result::$(echo ${{ github.event.pull_request.title }} | grep -E -i -q '[(!?feat|fix):(nojira|[A-Z]+-[0-9]+)].*') || (echo "Title format must equal [TYPE:ISSUE] MSG " && exit 1)"
+      shell: bash
